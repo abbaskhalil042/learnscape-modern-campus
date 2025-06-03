@@ -1,16 +1,17 @@
-
 import { useState } from "react";
-import { Search, ShoppingCart, User, BookOpen, Star, Clock, Users } from "lucide-react";
+import { Search, Star, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import Navbar from "@/components/Navbar";
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [cartItems, setCartItems] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
 
   const categories = [
@@ -33,7 +34,7 @@ const Index = () => {
       rating: 4.8,
       students: 15420,
       duration: "40 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop",
       description: "Master React from basics to advanced concepts with hands-on projects.",
       level: "Intermediate"
     },
@@ -47,7 +48,7 @@ const Index = () => {
       rating: 4.9,
       students: 8932,
       duration: "35 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop",
       description: "Learn modern UI/UX design principles and create stunning interfaces.",
       level: "Beginner"
     },
@@ -61,7 +62,7 @@ const Index = () => {
       rating: 4.7,
       students: 12045,
       duration: "25 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop",
       description: "Build comprehensive digital marketing strategies that drive results.",
       level: "Intermediate"
     },
@@ -75,7 +76,7 @@ const Index = () => {
       rating: 4.8,
       students: 9876,
       duration: "50 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=250&fit=crop",
       description: "Complete data science bootcamp with Python, ML, and AI projects.",
       level: "Advanced"
     },
@@ -89,7 +90,7 @@ const Index = () => {
       rating: 4.6,
       students: 6543,
       duration: "20 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop",
       description: "Develop essential leadership skills for modern business environments.",
       level: "Beginner"
     },
@@ -103,7 +104,7 @@ const Index = () => {
       rating: 4.9,
       students: 11234,
       duration: "45 hours",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop",
       description: "Master advanced JavaScript concepts and build scalable Node.js applications.",
       level: "Advanced"
     }
@@ -141,46 +142,21 @@ const Index = () => {
     }
   };
 
+  const handleSignOut = () => {
+    setIsAuthenticated(false);
+    toast({
+      title: "Signed out",
+      description: "You have been signed out successfully.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <BookOpen className="h-6 w-6 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                EduMaster
-              </h1>
-            </div>
-            
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Courses</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">About</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {cartItems.length > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-red-500">
-                    {cartItems.length}
-                  </Badge>
-                )}
-              </Button>
-              <Button variant="ghost" size="sm">
-                <User className="h-5 w-5" />
-              </Button>
-              <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                Sign Up
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar 
+        cartItemCount={cartItems.length}
+        isAuthenticated={isAuthenticated}
+        onSignOut={handleSignOut}
+      />
 
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -312,7 +288,7 @@ const Index = () => {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-lg flex items-center justify-center">
-                  <BookOpen className="h-5 w-5 text-white" />
+                  <span className="text-white font-bold">E</span>
                 </div>
                 <h3 className="text-xl font-bold">EduMaster</h3>
               </div>
