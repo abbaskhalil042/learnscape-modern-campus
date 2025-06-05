@@ -20,17 +20,6 @@ const Cart = () => {
       duration: "40 hours",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=200&fit=crop",
       level: "Intermediate"
-    },
-    {
-      id: 2,
-      title: "UI/UX Design Masterclass",
-      instructor: "Michael Chen",
-      price: 79.99,
-      originalPrice: 149.99,
-      rating: 4.9,
-      duration: "35 hours",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=200&fit=crop",
-      level: "Beginner"
     }
   ]);
 
